@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Associate{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="bg-dark text-secondary px-4 py-5 text-center">
+      {% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'success' %}<div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>{% elif message.tags == 'error' %}<div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>{% endif %}
+  {% endfor %}
+{% endif %}
+    <div class="py-5">
+      <h1 class="display-5 fw-bold text-white">Add New Associate</h1>
+        <br>
+      <div class="col-lg-6 mx-auto">
+        <p class="fs-5 mb-4">Please select the appropriate button below to add a single associate or bulk import them at once.</p>
+          <br>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" data-bs-toggle="modal" data-bs-target="#singleModal">Single</button>
+          <button type="button" class="btn btn-outline-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#bulkModal">Bulk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<div class="modal fade" id="singleModal" tabindex="-1" aria-labelledby="singleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="singleModalLabel">Add Associate</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <form method="POST">
+            {% csrf_token %}
+            <div class="card-body">
+              {{ form|crispy }}
+
+      <!--             <div class="btn-block">-->
+      <!--                <button type="submit" class="btn btn-primary" style="width:auto">Submit</button>-->
+      <!--              </div>-->
+                  </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="bulkModal" tabindex="-1" aria-labelledby="bulkModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bulkModalLabel">Add Associates in Bulk</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <form action="{% url 'bulk_import_associates' %}" method="post" enctype="multipart/form-data" id="bulk_import_associates">
+             {% csrf_token %}
+
+
+            <div class="card-body">
+
+                <div class="mb-2">
+                  <label for="formFile" class="form-label">Select the excel sheet</label>
+                  <input class="form-control" type="file" id="formFile" name="bulk_file">
+                </div>
+                <br>
+
+                <a href="{% url 'download_sample_format' %}">Click to download sample format</a>
+
+      <!--             <div class="btn-block">-->
+      <!--                <button type="submit" class="btn btn-primary" style="width:auto">Submit</button>-->
+      <!--              </div>-->
+            </div>
+
+        </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Import</button>
+            </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
