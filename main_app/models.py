@@ -1,0 +1,40 @@
+from django.db import models
+
+
+class Associate(models.Model):
+    yash_emp_id = models.CharField(max_length=250)
+    emp_name = models.CharField(max_length=250)
+    grade = models.CharField(max_length=250)
+    date_of_joining = models.CharField(max_length=250)
+    base_location = models.CharField(max_length=250)
+    current_location = models.CharField(max_length=250)
+    experience = models.CharField(max_length=250)
+    experience_range = models.CharField(max_length=250)
+    skill_cluster = models.CharField(max_length=250)
+    general_communication = models.CharField(max_length=250)
+    attitude = models.CharField(max_length=250)
+    core_java = models.CharField(max_length=250)
+    advance_java = models.CharField(max_length=250)
+    servlet_and_jsp = models.CharField(max_length=250)
+    spring_framework = models.CharField(max_length=250)
+    spring_mvc = models.CharField(max_length=250)
+    spring_security = models.CharField(max_length=250)
+    spring_boot = models.CharField(max_length=250)
+    struts = models.CharField(max_length=250)
+    web_services_rest_api = models.CharField(max_length=250)
+    web_services_soap = models.CharField(max_length=250)
+    frontend_html_css_javascript = models.CharField(max_length=250)
+    frontend_angular = models.CharField(max_length=250)
+    frontend_react = models.CharField(max_length=250)
+    relational_database = models.CharField(max_length=250)
+    non_relational_database = models.CharField(max_length=250)
+    orm_jpa_hibernate = models.CharField(max_length=250)
+    cloud_tech = models.CharField(max_length=250)
+    devops = models.CharField(max_length=250)
+    agile = models.CharField(max_length=250)
+    location_constraint = models.CharField(max_length=250)
+    overall_feedback = models.CharField(max_length=250)
+    comments = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.emp_name
