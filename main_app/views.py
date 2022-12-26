@@ -11,13 +11,13 @@ from main_app.resources import AssociateResource
 
 
 def home_page(request):
-    return render(request, "home_page.html")
+    return render(request, "index.html")
 
 
-def add_associate_home(request):
+def add_emp_home(request):
     form = AddAssociateForm()
     if request.method == 'GET':
-        return render(request, "add_associate_home.html", {'form': form})
+        return render(request, "add_emp_home.html", {'form': form})
 
     elif request.method == 'POST':
         form = AddAssociateForm(request.POST)
@@ -25,22 +25,22 @@ def add_associate_home(request):
             try:
                 form.save()
                 messages.success(request, "Associate added successfully.")
-                return redirect("add_associate_home")
+                return redirect("add_emp_home")
             except Exception as e:
                 messages.error(request, f"Error Adding Associate. Error code/message: {e}")
-                return redirect("add_associate_home")
+                return redirect("add_emp_home")
     else:
         messages.error(request, "Invalid entries found. Please check and try again.")
-        return redirect("add_associate_home")
+        return redirect("add_emp_home")
 
 
-def associate_list(request):
+def emp_list(request):
     associates = Associate.objects.all()
     context = {
         'associates': associates,
     }
 
-    return render(request, "associate_list.html", context)
+    return render(request, "emp_list.html", context)
 
 
 def bulk_import_associates(request):
@@ -92,3 +92,11 @@ def export_associate_data(request):
 
 def about_page(request):
     return render(request, "about_page.html")
+
+
+def login_page(request):
+    return render(request, "login_page.html")
+
+
+def signup_page(request):
+    return render(request, "signup_page.html")
